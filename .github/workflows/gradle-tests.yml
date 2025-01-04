@@ -42,3 +42,17 @@ jobs:
     # Run Tests
     - name: Run Tests
       run: ./gradlew test
+
+    # Send Discord Notification
+    - name: Send Discord Notification
+      if: always() # Run this step even if previous steps fail
+      env:
+        WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      run: |
+        STATUS=":white_check_mark: Success"
+        if [ "${{ job.status }}" != "success" ]; then
+          STATUS=":x: Failure"
+        fi
+        curl -H "Content-Type: application/json" \
+             -d "{\"content\": \"Build and Test status: $STATUS for branch \`${{ github.ref_name }}\`. Commit: ${{ github.sha }}\"}" \
+             $WEBHOOK_URL
