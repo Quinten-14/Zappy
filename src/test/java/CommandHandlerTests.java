@@ -14,7 +14,7 @@ public class CommandHandlerTests {
 
         handler.executeCommand("advance");
 
-        assertEquals("advancing\n", outContent.toString());
+        assertEquals("Advancing...\n", outContent.toString());
     }
 
     @Test
