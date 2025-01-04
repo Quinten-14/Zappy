@@ -14,7 +14,7 @@ public class CommandHandlerTests {
 
         handler.executeCommand("advance");
 
-        assertEquals("advancing\n", outContent.toString());
+        assertEquals("Advancing...\n", outContent.toString());
     }
 
     @Test
@@ -26,6 +26,6 @@ public class CommandHandlerTests {
 
         handler.executeCommand("invalid");
 
-        assertEquals("command not found\n", outContent.toString());
+        assertEquals("Command not found.\n", outContent.toString());
     }
 }
