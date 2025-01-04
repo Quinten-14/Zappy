@@ -12,6 +12,7 @@ on:
 
 jobs:
   build:
+    name: gradleTester
     runs-on: ubuntu-latest
 
     steps:
