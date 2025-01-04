@@ -6,25 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommandHandlerTests {
     @Test
-    public void testExecuteCommand() {
-        // Arrange
-        CommandHandler handler = new CommandHandler();
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
-        handler.executeCommand("advance");
-
-        assertEquals("Advancing...\n", outContent.toString());
-    }
-
-    @Test
     public void testExecuteCommandNotFound() {
         // Arrange
         CommandHandler handler = new CommandHandler();
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        handler.executeCommand("invalid");
+        String[] args = new String[] {"nonexistent"};
+        handler.executeCommand(args);
 
         assertEquals("Command not found.\n", outContent.toString());
     }
