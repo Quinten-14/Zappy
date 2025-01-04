@@ -1,5 +1,5 @@
 package Zappy.Commands;
 
 public interface Command {
-    public void execute();
+    public void execute(String[] args);
 }

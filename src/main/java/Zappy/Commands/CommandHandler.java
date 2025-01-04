@@ -11,10 +11,10 @@ public class CommandHandler {
         );
     }
 
-    public void executeCommand(String command) {
-        Command cmd = commands.get(command);
+    public void executeCommand(String[] args) {
+        Command cmd = commands.get(args[0]);
         if (cmd != null) {
-            cmd.execute();
+            cmd.execute(args);
         } else {
             System.out.println("Command not found.");
         }
