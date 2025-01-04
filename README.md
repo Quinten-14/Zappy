@@ -28,3 +28,4 @@ The format is as the following:
 - `"[y x <tile-content>]\n"`
   - The server will format the data tile by tile. The format will surround each tile with square braces, followed by the y and x coordinate of the tile, followed by the content of the tile seperated with a comma. Each tile will be seperated by the newline character.
   - Example for a 2x2 map: `"[0 0 player,sibur]\n[0 1 food]\n[1 0 ]\n[1 1 phiras,phiras]\n"`
+  - 
