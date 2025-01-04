@@ -26,6 +26,6 @@ public class CommandHandlerTests {
 
         handler.executeCommand("invalid");
 
-        assertEquals("command not found\n", outContent.toString());
+        assertEquals("Command not found.\n", outContent.toString());
     }
 }
