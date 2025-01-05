@@ -1,7 +1,8 @@
 package Client;
 
-import Client.Game.Loop;
-import Client.Initialise.InitClient;
+
+import Client.Initialise.Client;
+import Client.Initialise.ParseInput;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,8 +14,10 @@ public class Main {
             System.out.println("-h name of the host, by default it'll be localhost");
             return;
         }
-
-        InitClient client = new InitClient();
-        client.initClient(args);
+        ParseInput input = new ParseInput(args);
+        Client client = new Client(input.getTeam(), input.getHost(), input.getPort());
+        client.connect();
     }
 }
+
+
