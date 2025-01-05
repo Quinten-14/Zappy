@@ -16,8 +16,8 @@ The format is as the following:
 ### Server to Client
 The server will respond to any client request with the right formatting. The server response will be built from the command's success followed by the data requested by the command.
 The format is as the following:
-- `"<command-success>\n<command-data>\n"`
-  - The command success is one of the following strings followed by the newline character: ok, ko. This will be followed by the command's resulting data, if necessary. 
+- `"<command-success>\n<command-data>\n<current-position>\n"`
+  - The command success is one of the following strings followed by the newline character: ok, ko. This will be followed by the command's resulting data, if necessary. This will always be followed by the current client position formatted in a simple 'x y\n'.
     - If the command data contains a list of results, which occurs when you run 'see' or 'inventory', the string will be surrounded by curly braces followed by the listed content where the listed content is seperated by a comma followed by a space.
     - If the command data contains a simple string, the string will be sent through as such. 
   - Example 'view' command: `"ok\n{food, player sibur, phiras phiras, }\n"`
