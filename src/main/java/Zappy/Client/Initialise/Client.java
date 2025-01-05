@@ -18,8 +18,6 @@ public class Client
     private final ExecutorService executorService;
     private volatile boolean spawnReceived = false;
     private volatile String spawnLocation = null;
-    private final ConcurrentHashMap<Long, Socket> threadSocketMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<Long, Integer> testSocketMap = new ConcurrentHashMap<>();
     private static final Logger logger = Logger.getLogger(Client.class.getName());
 
     public Client(String teamName, String hostName, int port)
@@ -59,11 +57,9 @@ public class Client
                             spawnReceived = true;
                             System.out.println("Spawn location: " + spawnLocation);
                         }
-                        long threadId = Thread.currentThread().threadId();
-                        threadSocketMap.put(threadId, socket);
                     }
                     Loop loop = new Loop();
-                    loop.startGameLoop(threadSocketMap);
+                    loop.startGameLoop(socket);
                 }
                 catch (IOException e)
                 {

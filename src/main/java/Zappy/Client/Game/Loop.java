@@ -2,7 +2,7 @@ package Zappy.Client.Game;
 
 import Zappy.Client.Player.Player;
 import java.net.Socket;
-import java.util.concurrent.ConcurrentHashMap;
+
 import static java.lang.Thread.sleep;
 
 public class Loop
@@ -13,14 +13,13 @@ public class Loop
 
     }
 
-    public void startGameLoop(ConcurrentHashMap<Long, Socket> threadSocketMap) throws InterruptedException
+    public void startGameLoop(Socket socket) throws InterruptedException
     {
         boolean gameRunning = true;
         Algorithm algorithm = new Algorithm();
         CommandHandler command = new CommandHandler();
         Player player = new Player();
 
-        Socket socket = threadSocketMap.get(Thread.currentThread().threadId());
         while(gameRunning) {
             //The algorithm will return a string clarifying which command to run.
             String request = algorithm.run(player);
@@ -35,12 +34,17 @@ public class Loop
             {
                 sleep((long) player.getDelay() * millisecondMultiplier);
                 player.setHealth(player.getDelay() * -1);
-                if (response.contains("Food"))
-                {
-                    player.setHealth(126);
-                }
+
+                //Using the request and response data, change the values in player to show the actual values
+                handleResponse(request, response, player);
+
             }
         }
+
+    }
+
+    private void handleResponse(String request, String response, Player player)
+    {
 
     }
 }

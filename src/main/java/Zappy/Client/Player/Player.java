@@ -12,6 +12,7 @@ public class Player
     private Items items = new Items();
     private boolean incantationPossible = false;
     private boolean enoughPlayerLock = true;
+    private char direction = 'N';
 
     public Player()
     {
@@ -119,6 +120,14 @@ public class Player
 
     public void setEnoughPlayerLock(boolean enoughPlayerLock) {
         this.enoughPlayerLock = enoughPlayerLock;
+    }
+
+    public char getDirection() {
+        return direction;
+    }
+
+    public void setDirection(char direction) {
+        this.direction = direction;
     }
 }
 
