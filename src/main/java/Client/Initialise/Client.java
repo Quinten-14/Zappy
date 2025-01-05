@@ -2,6 +2,7 @@ package Client.Initialise;
 
 import java.io.*;
 import java.net.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,6 +18,7 @@ public class Client
     private final ExecutorService executorService;
     private volatile boolean spawnReceived = false;
     private volatile String spawnLocation = null;
+    private ConcurrentHashMap<Long, Socket> threadSocketMap = new ConcurrentHashMap<>();
 
     public Client(String teamName, String hostName, int port)
     {
@@ -24,22 +26,21 @@ public class Client
         this.port = port;
         if (!hostName.isEmpty())
             this.host = hostName;
-        executorService = Executors.newCachedThreadPool();
+        executorService = Executors.newCachedThreadPool(); //The cached pool thread dynamically expands as more threads are made until shut down.
     }
 
 
     public void connect()
     {
-        //try to connect to server using host:port and send the string 'team' as the first communication.
-        // If the server responds with 1 integer, it wants us to make that amount of threads and connect them one by one.
-        // If it responds with 2 integers, continue to game loop
-        // Each 'player client' will be represented by a thread, also the original connection, meaning we make 1 more than requested
         try
         {
             while (!spawnReceived)
             {
                 executorService.submit(() ->
                 {
+                    //Socket is used to create a connection between the server and the client
+                    //BufferedReader is used to receive responses from the server
+                    //PrintWriter is used to send requests to the server
                     try (Socket socket = new Socket(host, port);
                     BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     PrintWriter out = new PrintWriter(socket.getOutputStream(), true))
@@ -60,6 +61,8 @@ public class Client
                                 spawnReceived = true;
                                 System.out.println("Spawn location: " + spawnLocation);
                             }
+                            long threadId = Thread.currentThread().threadId();
+                            threadSocketMap.put(threadId, socket);
                         }
 
                     }
@@ -72,7 +75,7 @@ public class Client
             }
             executorService.shutdown();
             Loop loop = new Loop();
-            loop.startGameLoop();
+            loop.startGameLoop(threadSocketMap);
         }
         catch (InterruptedException e)
         {
