@@ -5,7 +5,6 @@ import static java.lang.System.exit;
 public class ParseInput {
     private static String team = null;
     private static String host = "localhost";
-    private static final String portStr = null;
     private static int port = 0;
 
     public ParseInput(String[] args)
@@ -27,7 +26,6 @@ public class ParseInput {
             exit(1);
         try {
             port = Integer.parseInt(portStr);
-            portStr = null;
         } catch (NumberFormatException e) {
             exit(1);
         }
