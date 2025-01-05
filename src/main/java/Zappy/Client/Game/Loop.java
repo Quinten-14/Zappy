@@ -1,4 +1,4 @@
-package Client.Game;
+package Zappy.Client.Game;
 
 import java.io.IOException;
 import java.net.Socket;

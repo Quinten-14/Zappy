@@ -1,4 +1,4 @@
-package Client.Game;
+package Zappy.Client.Game;
 
 public class CommandHandler {
 }

@@ -1,4 +1,4 @@
-package Client.Initialise;
+package Zappy.Client.Initialise;
 
 import java.io.*;
 import java.net.*;
@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import Client.Game.Loop;
+import Zappy.Client.Game.Loop;
 
 public class Client
 {

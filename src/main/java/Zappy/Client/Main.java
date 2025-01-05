@@ -1,8 +1,8 @@
-package Client;
+package Zappy.Client;
 
 
-import Client.Initialise.Client;
-import Client.Initialise.ParseInput;
+import Zappy.Client.Initialise.Client;
+import Zappy.Client.Initialise.ParseInput;
 
 public class Main {
     public static void main(String[] args) {

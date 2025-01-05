@@ -1,4 +1,4 @@
-package Client.Initialise;
+package Zappy.Client.Initialise;
 
 import static java.lang.System.exit;
 
