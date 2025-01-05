@@ -9,7 +9,7 @@ public class Player
     private int currentLevel = 1;
     private int[] location;
     ConcurrentHashMap<String, String> tiles;
-    private Items items = new Items();
+    private final Items items = new Items();
     private boolean incantationPossible = false;
     private boolean enoughPlayerLock = true;
     private char direction = 'N';

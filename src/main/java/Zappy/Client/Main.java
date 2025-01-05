@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         if (args.length == 0)
         {
-            System.out.println("Usage: java Client -n <teamname> -p <port> [-h <hostname>]");
+            System.out.println("Usage: java Client -n <team-name> -p <port> [-h <hostname>]");
             System.out.println("-n team name");
             System.out.println("-p port");
             System.out.println("-h name of the host, by default it'll be localhost");

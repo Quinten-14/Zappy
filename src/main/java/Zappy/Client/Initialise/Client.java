@@ -2,8 +2,6 @@ package Zappy.Client.Initialise;
 
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.*;
 import java.util.logging.Logger;
 
