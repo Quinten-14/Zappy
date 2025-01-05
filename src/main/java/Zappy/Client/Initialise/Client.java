@@ -19,6 +19,7 @@ public class Client
     private volatile boolean spawnReceived = false;
     private volatile String spawnLocation = null;
     private final ConcurrentHashMap<Long, Socket> threadSocketMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Long, Integer> testSocketMap = new ConcurrentHashMap<>();
     private static final Logger logger = Logger.getLogger(Client.class.getName());
 
     public Client(String teamName, String hostName, int port)
@@ -30,11 +31,11 @@ public class Client
         executorService = Executors.newCachedThreadPool(); //The cached pool thread dynamically expands as more threads are made until shut down.
     }
 
-    public void connect() {
-        List<Future<Void>> futures = new ArrayList<>();
+    public void connect()
+    {
         while (!spawnReceived)
         {
-            Future<Void> future = executorService.submit(() ->
+            executorService.submit(() ->
             {
                 //Socket is used to create a connection between the server and the client
                 //BufferedReader is used to receive responses from the server
@@ -61,32 +62,19 @@ public class Client
                         long threadId = Thread.currentThread().threadId();
                         threadSocketMap.put(threadId, socket);
                     }
+                    Loop loop = new Loop();
+                    loop.startGameLoop(threadSocketMap);
                 }
                 catch (IOException e)
                 {
                     logger.severe("IO Exception: " + e.getMessage());
                 }
-                return null;
+                catch (InterruptedException e)
+                {
+                    throw new RuntimeException(e);
+                }
             });
-            futures.add(future);
-
-            if (spawnReceived)
-                break;
-
-            for (Future<Void> f : futures)
-            {
-                try
-                {
-                    f.get(500, TimeUnit.MILLISECONDS);
-                }
-                catch (TimeoutException | InterruptedException | ExecutionException e)
-                {
-                    logger.severe("Task didn't complete in time or was interrupted: " + e.getMessage());
-                }
-            }
         }
         executorService.shutdown();
-        Loop loop = new Loop();
-        loop.startGameLoop(threadSocketMap);
     }
 }
