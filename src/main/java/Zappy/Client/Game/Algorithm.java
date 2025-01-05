@@ -21,7 +21,7 @@ public class Algorithm
         //If health drops below half, we'll lay an egg
 
         //Once command is decided, we'll return the String with the command's name
-        System.out.println(player);
+        System.out.println(player.getCurrentLevel());
         return null;
     }
 }

@@ -45,8 +45,6 @@ public class Loop
 
     private void handleResponse(String request, String response, Player player)
     {
-        System.out.println(request);
-        System.out.println(response);
-        System.out.println(player);
+
     }
 }

@@ -49,7 +49,7 @@ public class Client
                         if (parts.length == 1)
                         {
                             System.out.println("Waiting for more players..");
-                        } else if (parts.length == 2)
+                        } else if (parts.length == 4)
                         {
                             spawnLocation = response;
                             spawnReceived = true;

@@ -11,9 +11,9 @@ public class CommandHandler
     }
     public String sendToServer(Player player, String request, Socket socket)
     {
-        System.out.println(player);
+        System.out.println(player.getCurrentLevel());
         System.out.println(request);
-        System.out.println(socket);
+        System.out.println(socket.getPort());
 
         return null;
     }
